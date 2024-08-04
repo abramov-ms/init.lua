@@ -2,7 +2,7 @@ return {
   "shortcuts/no-neck-pain.nvim",
   config = function ()
     require("no-neck-pain").setup({
-      width = 90,
+      width = 100,
       mappings = {
         enabled = true,
         widthUp = "<Leader>n+",
