@@ -3,7 +3,6 @@ return {
   event = "VeryLazy",
   opts = {
     options = {
-      theme = "tokyonight",
       globalstatus = true,
       disabled_filetypes = {
         statusline = {
