@@ -1,7 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = function()
-    pcall(function ()
+    pcall(function()
       vim.cmd.TSUpdate()
     end)
   end,
@@ -17,7 +17,8 @@ return {
       enable = true
     },
     indent = {
-      enable = true
+      enable = true,
+      disable = { "markdown" }
     },
     ensure_installed = {
       "bash",
@@ -33,4 +34,3 @@ return {
     require("nvim-treesitter.configs").setup(opts)
   end
 }
-
