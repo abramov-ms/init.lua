@@ -3,8 +3,8 @@
 ## clangd
 
 Подсветка и go to definition работают за счет
-[`clangd`](https://clangd.llvm.org/). Его можно поставить через пакетный
-менеджер либо из вима через mason (`<space>mm`, потом найти clangd и тыкнуть
+[clangd](https://clangd.llvm.org/). Его можно поставить через пакетный
+менеджер либо из вима через (`<space>mm`, потом найти clangd и тыкнуть
 `I` по нему).
 
 В проектах с нестандартными флагами компиляции нужно, чтобы в корневой
@@ -14,7 +14,7 @@
 [`CMAKE_EXPORT_COMPILE_COMMANDS`](https://cmake.org/cmake/help/latest/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html)
 (`mkdir build && cd build && cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=ON`).
 Если проект не на симейке, можно использовать
-[`bear`](https://github.com/rizsotto/Bear).
+[bear](https://github.com/rizsotto/Bear).
 
 ## Хоткеи
 
@@ -26,7 +26,7 @@
 | `<Alt>O` | Переключение между хедером и `.cpp` |
 | `<Space>np` | Переключение [no-neck-pain](https://github.com/shortcuts/no-neck-pain.nvim) |
 | `<Space>ff` | Поиск файлов через [telescope](https://github.com/nvim-telescope/telescope.nvim) |
-| `<Space>fs` | Греп по файлам требует установки [ripgrep](https://github.com/BurntSushi/ripgrep) |
+| `<Space>fs` | Греп по файлам, требует установки [ripgrep](https://github.com/BurntSushi/ripgrep) |
 | `<Space>ldf` | Поиск символов в текущем буфере |
 | `<Space>lfs` | Поиск символов глобально в проекте |
 | `<Space>lfr` | Find references на символ под курсором |
