@@ -1,13 +1,13 @@
--- return {
---   {
---     "oxfist/night-owl.nvim",
---     lazy = false,
---     priority = 1000,
---     config = function()
---       vim.cmd.colorscheme("night-owl")
---     end
---   }
--- }
+return {
+  {
+    "oxfist/night-owl.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme("night-owl")
+    end
+  }
+}
 
 -- return {
 --   "bluz71/vim-moonfly-colors",
@@ -44,16 +44,16 @@
 --   end
 -- }
 
-return {
-  "rose-pine/neovim",
-  name = "rose-pine",
-  lazy = false,
-  priority = 1000,
-  config = function()
-    require("rose-pine").setup({})
-    vim.cmd.colorscheme("rose-pine-main")
-  end
-}
+-- return {
+--   "rose-pine/neovim",
+--   name = "rose-pine",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     require("rose-pine").setup({})
+--     vim.cmd.colorscheme("rose-pine-main")
+--   end
+-- }
 
 -- return {
 --   "rebelot/kanagawa.nvim",
