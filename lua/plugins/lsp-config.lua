@@ -53,7 +53,7 @@ return {
     )
 
     lspconfig.clangd.setup({
-      cmd = { "clangd", "-header-insertion=never" }
+      cmd = { "/usr/bin/clangd", "-header-insertion=never" }
     })
 
     lspconfig.cmake.setup({})
