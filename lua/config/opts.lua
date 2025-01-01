@@ -22,5 +22,3 @@ vim.opt.cmdheight = 0
 vim.opt.laststatus = 3
 
 vim.g.nonels_suppress_issue58 = true
-
-vim.opt.colorcolumn = {80}
