@@ -26,23 +26,23 @@
 --   lazy = false,
 --   priority = 1000,
 --   config = function()
---     vim.cmd.colorscheme("catppuccin-latte")
+--     vim.cmd.colorscheme("catppuccin")
 --   end
 -- }
 
-return {
-  "folke/tokyonight.nvim",
-  name = "tokyonight",
-  lazy = false,
-  priority = 1000,
-  config = function()
-    require("tokyonight").setup({
-      style = "night"
-    })
-
-    vim.cmd.colorscheme("tokyonight")
-  end
-}
+-- return {
+--   "folke/tokyonight.nvim",
+--   name = "tokyonight",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     require("tokyonight").setup({
+--       style = "night"
+--     })
+--
+--     vim.cmd.colorscheme("tokyonight")
+--   end
+-- }
 
 -- return {
 --   "rose-pine/neovim",
@@ -104,3 +104,24 @@ return {
 --     vim.cmd.colorscheme("darkplus")
 --   end
 -- }
+
+return {
+  "ellisonleao/gruvbox.nvim",
+  name = "gruvbox",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    require("gruvbox").setup({
+      inverse = false,
+      contrast = "hard",
+      bold = false,
+      overrides = {
+        LspReferenceText = { link = "CursorLine" },
+        LspReferenceRead = { link = "CursorLine" },
+        LspReferenceWrite = { link = "CursorLine" }
+      }
+    })
+
+    vim.cmd.colorscheme("gruvbox")
+  end
+}

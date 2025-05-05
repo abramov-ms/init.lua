@@ -27,7 +27,8 @@ return {
       "c",
       "cpp",
       "rust",
-      "go"
+      "go",
+      "java",
     }
   },
   config = function(_, opts)

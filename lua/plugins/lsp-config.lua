@@ -53,7 +53,13 @@ return {
     )
 
     lspconfig.clangd.setup({
-      cmd = { "/usr/bin/clangd", "-header-insertion=never" }
+      cmd = {
+        "/usr/bin/clangd",
+        "--header-insertion=never",
+        "--limit-references=0",
+        "--limit-results=0",
+        "--rename-file-limit=0"
+      }
     })
 
     lspconfig.cmake.setup({})
@@ -77,5 +83,19 @@ return {
     lspconfig.gopls.setup({})
 
     lspconfig.rust_analyzer.setup({})
+
+    lspconfig.jdtls.setup({
+      cmd = {
+        "~/.jdks/liberica-full-17.0.10/bin/java",
+        "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+        "-Dosgi.bundles.defaultStartLevel=4",
+        "-Declipse.product=org.eclipse.jdt.ls.core.product",
+        "-Dlog.protocol=true",
+      },
+      runtimes = {
+        name = "Java 17",
+        path = "~/.jdks/liberica-full-17.0.10",
+      }
+    })
   end
 }
