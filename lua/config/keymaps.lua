@@ -1,9 +1,5 @@
 vim.g.mapleader = " "
 
--- Force quit.
-
-vim.keymap.set({ "n", "t" }, "<C-q>", "<Cmd>q!<CR>")
-
 -- Resizing windows.
 
 vim.keymap.set("n", "<C-Up>", "<Cmd>resize +1<CR>")

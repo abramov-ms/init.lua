@@ -62,6 +62,8 @@ return {
       }
     })
 
+    lspconfig.pyright.setup({})
+
     lspconfig.cmake.setup({})
 
     lspconfig.lua_ls.setup({
