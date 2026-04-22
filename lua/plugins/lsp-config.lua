@@ -86,18 +86,6 @@ return {
 
     lspconfig.rust_analyzer.setup({})
 
-    lspconfig.jdtls.setup({
-      cmd = {
-        "~/.jdks/liberica-full-17.0.10/bin/java",
-        "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-        "-Dosgi.bundles.defaultStartLevel=4",
-        "-Declipse.product=org.eclipse.jdt.ls.core.product",
-        "-Dlog.protocol=true",
-      },
-      runtimes = {
-        name = "Java 17",
-        path = "~/.jdks/liberica-full-17.0.10",
-      }
-    })
+    lspconfig.ts_ls.setup({})
   end
 }
