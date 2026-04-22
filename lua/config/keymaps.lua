@@ -1,12 +1,5 @@
 vim.g.mapleader = " "
 
--- Resizing windows.
-
-vim.keymap.set("n", "<C-Up>", "<Cmd>resize +1<CR>")
-vim.keymap.set("n", "<C-Down>", "<Cmd>resize -1<CR>")
-vim.keymap.set("n", "<C-Left>", "<Cmd>vertical resize -1<CR>")
-vim.keymap.set("n", "<C-Right>", "<Cmd>vertical resize +1<CR>")
-
 -- Paste/delete preserving clipboard contents.
 
 vim.keymap.set("n", "<Leader>p", [["_dP]])
