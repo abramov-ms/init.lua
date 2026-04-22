@@ -13,11 +13,11 @@ vim.keymap.set("n", "<Leader>x", "<Cmd>silent !chmod +x %<CR>")
 
 vim.keymap.set("n", "-", vim.cmd.Oil)
 
--- Lsp.
-
-vim.keymap.set("n", "<M-o>", vim.cmd.ClangdSwitchSourceHeader)
-
 -- Quickfix list.
 
 vim.keymap.set("n", "<C-j>", "<Cmd>cn<CR>zz")
 vim.keymap.set("n", "<C-k>", "<Cmd>cp<CR>zz")
+
+-- Clangd.
+
+vim.keymap.set("n", "<M-o>", "<Cmd>LspClangdSwitchSourceHeader<CR>")
