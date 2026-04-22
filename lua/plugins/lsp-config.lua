@@ -1,58 +1,59 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    {
-      "folke/neodev.nvim",
-      config = true
-    },
-    {
-      "hrsh7th/nvim-cmp"
-    }
+    "hrsh7th/nvim-cmp"
   },
   config = function()
-    local lspconfig = require("lspconfig")
+    local util = require("lspconfig.util")
     local cmp_caps = require("cmp_nvim_lsp").default_capabilities()
 
-    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-      vim.lsp.diagnostic.on_publish_diagnostics, { signs = false }
-    )
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = vim.api.nvim_create_augroup('my.lsp', {}),
+      callback = function(args)
+        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
-    lspconfig.util.default_config = vim.tbl_extend(
-      "force",
-      lspconfig.util.default_config,
-      {
-        capabilities = cmp_caps,
-        on_attach = function(client, bufnr)
-          local opts = {
-            buffer = bufnr
-          }
+        local opts = {
+          buffer = args.buf
+        }
 
-          vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
-          vim.keymap.set("n", "<Leader>ldd", vim.diagnostic.open_float, opts)
-          vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-          vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-
-          vim.keymap.set("n", "<Leader>lca", vim.lsp.buf.code_action, opts)
-          vim.keymap.set("n", "<Leader>lcw", vim.lsp.buf.rename, opts)
-          vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
-
-          if client.supports_method("textDocument/formatting") then
-            local fmt = function()
-              vim.lsp.buf.format({ async = false })
-            end
-
-            vim.keymap.set("n", "<leader>fi", fmt, opts)
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = bufnr,
-              callback = fmt
-            })
+        local show_diagnostic = function(count)
+          return function()
+            vim.diagnostic.jump({ count = count, float = true })
           end
         end
+
+        vim.keymap.set("n", "]d", show_diagnostic(1), opts)
+        vim.keymap.set("n", "[d", show_diagnostic(-1), opts)
+
+        vim.keymap.set("n", "<Leader>lca", vim.lsp.buf.code_action, opts)
+        vim.keymap.set("n", "<Leader>lcw", vim.lsp.buf.rename, opts)
+        vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+
+        if client:supports_method("textDocument/formatting") then
+          local fmt = function()
+            vim.lsp.buf.format({ async = false })
+          end
+
+          vim.keymap.set("n", "<leader>fi", fmt, opts)
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = args.buf,
+            callback = fmt
+          })
+        end
+      end,
+    })
+
+    util.default_config = vim.tbl_extend(
+      "force",
+      util.default_config,
+      {
+        capabilities = cmp_caps
       }
     )
 
-    lspconfig.clangd.setup({
+    vim.lsp.config("clangd", {
       cmd = {
         "/usr/bin/clangd",
         "--header-insertion=never",
@@ -61,31 +62,50 @@ return {
         "--rename-file-limit=0"
       }
     })
+    vim.lsp.enable("clangd")
 
-    lspconfig.pyright.setup({})
+    vim.lsp.enable("pyright")
+    vim.lsp.enable("cmake")
 
-    lspconfig.cmake.setup({})
+    vim.lsp.config('lua_ls', {
+      on_init = function(client)
+        if client.workspace_folders then
+          local path = client.workspace_folders[1].name
+          if
+              path ~= vim.fn.stdpath('config')
+              and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+          then
+            return
+          end
+        end
 
-    lspconfig.lua_ls.setup({
-      settings = {
-        Lua = {
+        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
           runtime = {
-            version = "LuaJIT"
+            version = 'LuaJIT',
+            path = {
+              'lua/?.lua',
+              'lua/?/init.lua',
+            },
           },
+          -- Make the server aware of Neovim runtime files
           workspace = {
-            checkThirdParty = false
+            checkThirdParty = false,
+            library = {
+              vim.env.VIMRUNTIME,
+              vim.api.nvim_get_runtime_file("lua/lspconfig", false)[1],
+              '${3rd}/luv/library',
+            },
           },
-          telemetry = {
-            enable = false
-          }
-        }
-      }
+        })
+      end,
+      settings = {
+        Lua = {},
+      },
     })
+    vim.lsp.enable("lua_ls")
 
-    lspconfig.gopls.setup({})
-
-    lspconfig.rust_analyzer.setup({})
-
-    lspconfig.ts_ls.setup({})
+    vim.lsp.enable("gopls")
+    vim.lsp.enable("rust_analyzer")
+    vim.lsp.enable("ts_ls")
   end
 }

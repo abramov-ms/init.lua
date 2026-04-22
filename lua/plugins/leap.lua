@@ -1,5 +1,5 @@
 return {
-  "ggandor/leap.nvim",
+  "https://codeberg.org/andyg/leap.nvim",
   config = function()
     require("leap").setup({})
     vim.keymap.set("n", "s", "<Plug>(leap-forward)")
