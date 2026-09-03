@@ -37,10 +37,6 @@ return {
           end
 
           vim.keymap.set("n", "<leader>fi", fmt, opts)
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = args.buf,
-            callback = fmt
-          })
         end
       end,
     })
